@@ -20,7 +20,7 @@ export class PipelineStack extends cdk.Stack {
       synth: new ShellStep('Synth',{
         input: CodePipelineSource.connection(
           'JohnCameron94/cdk-codepipeline',
-          'main',
+          'master',
           {
             connectionArn: 'arn:aws:codestar-connections:ca-central-1:360070888501:connection/5199c46f-94d5-4428-b063-9513fed3c5e2'
           }

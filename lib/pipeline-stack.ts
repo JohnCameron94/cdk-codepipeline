@@ -35,9 +35,6 @@ export class PipelineStack extends cdk.Stack {
       })
     });
     
-    
-    pipeline.addStage(new AppStage(this,'Test', { env:props.env, appName:props.appName}));
-    
     const testStage = pipeline.addStage(new AppStage(this, 'Testing', {
       env:props.env,
       appName:props.appName

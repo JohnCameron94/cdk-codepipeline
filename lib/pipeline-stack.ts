@@ -17,7 +17,7 @@ export class PipelineStack extends cdk.Stack {
       pipelineName: 'MyPipeline',
       synth: new ShellStep('Synth',{
         input: CodePipelineSource.gitHub(
-          'https://github.com/JohnCameron94/cdk-codepipeline.git','main'),
+          'JohnCameron94/cdk-codepipeline','main'),
           commands: ['npm ci', 'npm run build', 'npx cdk synth']
       })
     });

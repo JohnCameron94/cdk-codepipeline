@@ -7,7 +7,7 @@ import {
   CodePipeline, 
   CodePipelineSource, 
   ShellStep,
-  ManualApproval
+  ManualApprovalStep
 } from 'aws-cdk-lib/pipelines'; 
 
 export interface PipelineStackProps extends cdk.StackProps {
@@ -43,6 +43,6 @@ export class PipelineStack extends cdk.Stack {
       appName:props.appName
     }));
     
-    testStage.addPost(new ManualApproval('approval'))
+    testStage.addPost(new ManualApprovalStep('approval'))
   }
 }

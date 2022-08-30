@@ -4,12 +4,16 @@ import * as cdk from 'aws-cdk-lib';
 import { PipelineStack } from '../lib/pipeline-stack';
 import { dev } from '../environment';
 
+// CDK Application
 const app = new cdk.App();
+
+// Creating new pipeline
 new PipelineStack(app, 'PipelineStack', {
-  env: {
-    account:dev.account,
-    region: dev.region
-  }
+  env: {                  // Current environment
+    account:dev.account,  // environment
+    region: dev.region    // region
+  },
+  appName: app.node.tryGetContext('app-name') // application name
 });
 
-app.synth();
+app.synth(); // Synth application

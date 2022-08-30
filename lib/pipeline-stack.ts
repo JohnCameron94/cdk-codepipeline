@@ -1,16 +1,22 @@
 import * as cdk from 'aws-cdk-lib';
 
-import { DeployStage } from './deploy-stage';
+import { AppStage } from './app-stage';
 import { Construct } from 'constructs';
 
 import { 
   CodePipeline, 
   CodePipelineSource, 
-  ShellStep 
+  ShellStep,
+  ManualApproval
 } from 'aws-cdk-lib/pipelines'; 
 
+export interface PipelineStackProps extends cdk.StackProps {
+  env: cdk.Environment;
+  appName: string;
+}
+
 export class PipelineStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: PipelineStackProps) {
     super(scope, id, props);
   
   
@@ -28,5 +34,15 @@ export class PipelineStack extends cdk.Stack {
           commands: ['npm ci', 'npm run build', 'npx cdk synth']
       })
     });
+    
+    
+    pipeline.addStage(new AppStage(this,'Test', { env:props.env, appName:props.appName}));
+    
+    const testStage = pipeline.addStage(new AppStage(this, 'Testing', {
+      env:props.env,
+      appName:props.appName
+    }));
+    
+    testStage.addPost(new ManualApproval('approval'))
   }
 }

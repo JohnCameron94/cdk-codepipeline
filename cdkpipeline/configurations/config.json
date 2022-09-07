@@ -1,0 +1,55 @@
+{
+    "application": {
+        "application_name": "cdk-pipeline",
+        "repository_name": "JohnCameron94/cdk-pipeline",
+        "repository_url" : "https://github.com/JohnCameron94/cdk-codepipeline.git",
+        "branch": "master",
+        "build_environment": {
+            "account": "360070888501",
+            "region": "ca-central-1"
+        }
+        // ...
+    },
+    "environments": {
+        "default": {
+            "name": "default",
+            "env": {
+                "region": "ca-central-1"
+            },
+            "tags": {
+                "application": "cdk-pipeline",
+                "team": "jcameron"
+            },
+            "deletion_protection": true,
+            "removal_policy": "RETAIN",
+            "minimum_auto_scaling_group": 2,
+            "maximum_auto_scaling_group": 10
+            // ...
+        },
+        "development": {
+            "name": "development",
+            "env": {
+                "account": "360070888501"
+            },
+            "deletion_protection": false,
+            "removal_policy": "DESTROY",
+            "minimum_auto_scaling_group": 1,
+            "maximum_auto_scaling_group": 3
+            // ...
+        },
+        "staging": {
+            "name": "staging",
+            "env": {
+                "account": "360070888501"
+            }
+            // ..
+        },
+        "production": {
+            "name": "production",
+            "env": {
+                "account": "360070888501"
+            }
+            // ...
+        }
+    }
+}
